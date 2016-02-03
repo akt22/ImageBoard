@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(user) do |f| %>
+      <h1>ImageBoard</h1>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.text_field :name, class: 'form-control', :placeholder => "ユーザーネーム" %>
+
+      <%= f.email_field :email, class: 'form-control', :placeholder => "メールアドレス" %>
+
+      <%= f.password_field :password, class: 'form-control', :placeholder => "パスワード" %>
+
+      <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "パスワードの再入力" %>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
