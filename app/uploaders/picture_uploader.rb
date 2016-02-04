@@ -6,6 +6,14 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   storage :file
 
+  version :thumb do
+    process resize_to_limit: [100, 100]
+  end
+
+  def filename
+    super if original_filename.present?
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

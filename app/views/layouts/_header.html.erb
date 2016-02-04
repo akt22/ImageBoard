@@ -1,6 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-default">
   <div class="container">
-    <%= link_to "ImageBoard", root_path, id: "logo" %>
+    <%= link_to image_tag("logo.png", alt: "ImageBoard", id: "logo"), root_path %>
+    <%#= link_to "ImageBoard", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>

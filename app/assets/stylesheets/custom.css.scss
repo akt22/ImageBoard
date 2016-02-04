@@ -21,6 +21,11 @@ body {
   background-color: #fafafa
 }
 
+img#logo {
+  width: auto;
+  max-height: 2em;
+}
+
 section {
   overflow: auto;
 }
@@ -45,6 +50,11 @@ textarea {
     text-align: left;
     margin-bottom: 40px;
   }
+}
+
+.btn-primary {
+  background-color: #d17062;
+  border: 0px;
 }
 
 .jumbotron {
@@ -247,6 +257,10 @@ aside {
 
 .users.follow {
   padding: 0;
+}
+
+.follow {
+  margin-top: 10px;
 }
 
 /* forms */
