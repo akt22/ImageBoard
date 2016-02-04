@@ -5,11 +5,9 @@
   </div>
   <%= f.submit "投稿する", class: "btn btn-primary" %>
 
-  <span class="picture" style="margin-left: 30%;">
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "filestyle", "data-input" => "false" %>
-    <%= f.hidden_field :picture_cache %>
+  <span class="picture">
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "filestyle", "data-icon" => "false" %>
     <span>
-      <%= image_tag @micropost.picture.thumb.url if @micropost.picture? %>
     </span>
   </span>
 <% end %>
