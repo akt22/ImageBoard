@@ -7,7 +7,9 @@ class MicropostsController < ApplicationController
     if @micropost.save
       flash[:success] = "Micropost created"
       if @micropost.picture?
-        p vision @micropost.picture.filename
+        (vision @micropost.picture.file.path).each do |r|
+          p r
+        end
       end
       redirect_to root_url
     else
@@ -51,4 +53,7 @@ class MicropostsController < ApplicationController
       }.to_json
     end
 
+    def result_parse(response)
+      JSON.parse(response)['result']
+    end
 end
