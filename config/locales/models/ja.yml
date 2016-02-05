@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      micropost: つぶやき
     attributes:
       user:
         id: ID
@@ -10,3 +11,6 @@ ja:
         updated_at: 更新日時
         email: メールアドレス
         password: パスワード
+      micropost:
+        content: 本文
+        picture: 写真

@@ -4,6 +4,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   process resize_to_limit: [400, 400]
 
+  process :convert => 'jpg'
+
   storage :file
 
   version :thumb do

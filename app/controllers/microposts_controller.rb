@@ -6,12 +6,12 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "Micropost created"
+      redirect_to root_url
       if @micropost.picture?
         (vision @micropost.picture.file.path).each do |r|
           p r
         end
       end
-      redirect_to root_url
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
@@ -27,7 +27,7 @@ class MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:picture_cache, :content, :picture)
+      params.require(:micropost).permit(:content, :picture)
     end
 
     def correct_user
@@ -39,8 +39,8 @@ class MicropostsController < ApplicationController
       http_client = HTTPClient.new
       endpoint_uri = 'http://www.ai.cs.kobe-u.ac.jp/vision'
       content = Base64.strict_encode64(File.new(file_path, 'rb').   read)
-      response = http_client.post_content(endpoint_uri,     request_json(content), 'Content-Type' => 'application/json'  )
-      result_parse(response)
+      response = http_client.post_content(endpoint_uri, request_json(content), 'Content-Type' => 'application/json')
+      parse_result(response)
     end
 
     def request_json(content)
@@ -53,7 +53,7 @@ class MicropostsController < ApplicationController
       }.to_json
     end
 
-    def result_parse(response)
+    def parse_result(response)
       JSON.parse(response)['result']
     end
 end
