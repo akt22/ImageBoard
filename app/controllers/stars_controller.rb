@@ -20,7 +20,6 @@ class StarsController < ApplicationController
       format.html { redirect_to request.referrer || root_url }
       format.js
     end
-    # redirect_to request.referrer || root_url
   end
 
   private
