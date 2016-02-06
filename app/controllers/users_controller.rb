@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    @search = User.search(params[:q])
+    @res_user = @search.result.paginate(page: params[:page])
   end
 
   def show

@@ -54,7 +54,13 @@ textarea {
 
 .btn-primary {
   background-color: #d17062;
+  border: 1px solid #d17062;
   border: 0px;
+  &:hover {
+    background-color: white;
+    color: #d17062;
+    border: 1px solid #d17062;
+  }
 }
 
 .jumbotron {
