@@ -1,4 +1,4 @@
 class Tag < ActiveRecord::Base
   belongs_to :micropost
-  validates :tag, presence: true
+  validates :micropost_id, presence: true
 end
