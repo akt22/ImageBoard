@@ -6,12 +6,8 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "つぶやきました。"
+      tagging if @micropost.picture?
       redirect_to root_url
-      if @micropost.picture?
-        (vision @micropost.picture.file.path).each do |r|
-          p r
-        end
-      end
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
@@ -20,12 +16,8 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = "つぶやきを削除しました。"
     redirect_to request.referrer || root_url
-  end
-
-  def show
-    @micropost = Micropost.find(params[:id])
   end
 
   private
@@ -37,6 +29,16 @@ class MicropostsController < ApplicationController
     def correct_user
       @micropost = current_user.microposts.find_by(id: params[:id])
       redirect_to root_url if @micropost.nil?
+    end
+
+    def tagging
+      begin
+        (vision @micropost.picture.file.path).each do |res|
+          @micropost.tag.build(tag: res[1].strip).save
+        end
+      rescue => e
+        p "API Error."
+      end
     end
 
     def vision(file_path)

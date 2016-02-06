@@ -1,0 +1,5 @@
+<div><%= form_for(micropost.stars.find_by(micropost_id: micropost.id), html: { method: :delete }, remote: true) do |f| %>
+  <%= image_submit_tag "star.png", class: "star" %>
+<% end %>
+</div>
+<div><%= stars_counter(micropost) %></div>

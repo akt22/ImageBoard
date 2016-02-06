@@ -342,10 +342,16 @@ input {
       padding: 5px 0;
     }
   }
-  .timestamp {
+  .starcount {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-top: -20px;
+    margin-left: 100px;
   }
   .gravatar {
     float: left;

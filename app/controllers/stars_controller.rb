@@ -5,16 +5,22 @@ class StarsController < ApplicationController
   def create
     @micropost = Micropost.find_by(id: params[:micropost_id])
     @star = @micropost.stars.build(user_id: current_user.id, micropost_id: @micropost.id)
-    if @star.save
-      flash[:success] = "いいねしました。"
-      redirect_to request.referrer || root_url
+    @star.save
+    respond_to do |format|
+      format.html { redirect_to request.referrer || root_url}
+      format.js
     end
   end
 
   def destroy
     @star = current_user.stars.find_by(id: params[:id])
+    @micropost = Micropost.find_by(id: @star.micropost_id)
     @star.destroy
-    redirect_to request.referrer || root_url
+    respond_to do |format|
+      format.html { redirect_to request.referrer || root_url }
+      format.js
+    end
+    # redirect_to request.referrer || root_url
   end
 
   private
