@@ -3,7 +3,8 @@ class StarsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def create
-    @star = Star.create(user_id: current_user.id, micropost_id: params[:micropost_id])
+    @micropost = Micropost.find_by(id: params[:micropost_id])
+    @star = @micropost.stars.build(user_id: current_user.id, micropost_id: @micropost.id)
     if @star.save
       flash[:success] = "いいねしました。"
       redirect_to request.referrer || root_url
@@ -11,8 +12,16 @@ class StarsController < ApplicationController
   end
 
   def destroy
-    @star = current_user.stars.find_by(micropost_id: params[:micropost_id])
+    @star = current_user.stars.find_by(id: params[:id])
     @star.destroy
-    @stars = Star.where(micropost_id: params[:micropost_id])
+    redirect_to request.referrer || root_url
   end
+
+  private
+
+    def correct_user
+      @star = current_user.stars.find_by(id: params[:id])
+      redirect_to root_url if @star.nil?
+    end
+
 end

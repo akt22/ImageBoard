@@ -6,17 +6,19 @@
     <%= image_tag micropost.picture.url if micropost.picture? %>
   </span>
   <span class="timestamp">
-  <% if micropost.star_user(current_user) %>
-    <div id="star-button">
-      <%= image_tag("star.png", class: "star") %>
-      <% stars_counter(micropost) %>
-    </div>
-  <% else %>
-    <div id="star-button">
-      <%= image_tag("unstar.png", class: "star") %>
-      <%= stars_counter(micropost) %>
-    </div>
-  <% end %>
+  <div id="star-button">
+    <% if micropost.star_user(current_user) %>
+      <div><%= form_for(micropost.stars.find_by(micropost_id: micropost.id), html: { method: :delete }) do |f| %>
+        <%= image_submit_tag "star.png", class: "star" %>
+      <% end %>
+    <% else %>
+      <div><%= form_for(micropost.stars.build) do |f| %>
+        <%= hidden_field_tag :micropost_id, micropost.id %>
+        <%= image_submit_tag "unstar.png", class: "star" %>
+      <% end %>
+    <% end %>
+    <%= stars_counter(micropost) %></div>
+  </div>
     Posted <%= time_ago_in_words(micropost.created_at) %> ago
     <% if current_user?(micropost.user) %>
       <%= link_to "削除", micropost, method: :delete,
@@ -24,30 +26,3 @@
     <% end %>
   </span>
 </li>
-
-<script>
-  var $heart = $("#star");
-  $("#star-button").on("click", function(){
-    var $starSum = $("#star-sum");
-    star_function(<%= "#{micropost.id}" %>, $(this), $heart, $starSum);
-  });
-  // この関数は同じページのidを全部うけとってる
-  function star_function(id, button, heart, sum) {
-    console.log(id);
-    if (button.hasClass("decrement")){
-        $.ajax({url: "/stars/" + id, type: "delete", data: {micropost_id: id, dataType: "json"}})
-        .done(function(data){
-        button.removeClass("decrement").addClass("increment")
-        heart.attr("src", "/assets/unstar.png")
-        sum.text(data["count"])
-        })
-      }else{
-        $.ajax({url: "/stars", type: "post", data: {post_id: id, dataType: "json"}})
-        .done(function(data){
-        button.removeClass("increment").addClass("decrement")
-        heart.attr("src", "/assets/star.png")
-        sum.text(data["count"])
-        })
-      }
-  }
-</script>

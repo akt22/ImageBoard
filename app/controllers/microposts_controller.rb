@@ -5,7 +5,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created"
+      flash[:success] = "つぶやきました。"
       redirect_to root_url
       if @micropost.picture?
         (vision @micropost.picture.file.path).each do |r|
