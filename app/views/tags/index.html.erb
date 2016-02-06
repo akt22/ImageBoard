@@ -1,0 +1,19 @@
+<h1>画像検索</h1>
+<h2>全ユーザーが投稿した画像を1000個のラベルから検索することができます。
+<%= link_to "ラベル一覧", "https://gist.github.com/akt22/7512748e0f56b052dc69" %></h2>
+<div><%= search_form_for @search do |f| %>
+  <div class="field">
+    <%= f.text_field :tag_cont, placeholder: "検索" %>
+  </div>
+  <div class="actions"><%= f.submit "Search", class: "btn btn-primary search" %></div>
+  </div>
+<% end %>
+
+<% if @res_micropost.any? %>
+  <ol class="microposts">
+    <%= render @res_micropost %>
+  </ol>
+  <%= will_paginate @res_micropost %>
+<% else %>
+  <h2>一致する画像は見つかりませんでした。</h2>
+<% end %>

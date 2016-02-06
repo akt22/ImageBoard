@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206094038) do
+ActiveRecord::Schema.define(version: 20160206140721) do
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20160206094038) do
   add_index "stars", ["micropost_id"], name: "index_stars_on_micropost_id"
   add_index "stars", ["user_id", "micropost_id"], name: "index_stars_on_user_id_and_micropost_id", unique: true
   add_index "stars", ["user_id"], name: "index_stars_on_user_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "tag"
+    t.integer  "micropost_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "tags", ["micropost_id"], name: "index_tags_on_micropost_id"
+  add_index "tags", ["tag"], name: "index_tags_on_tag"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

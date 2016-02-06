@@ -2,9 +2,9 @@
 <h1>全ユーザー</h1>
 <%= search_form_for @search do |f| %>
   <div class="field">
-    <%= f.text_field :name_cont, placeholder: "検索" %>
+    <%= f.text_field :name_cont, placeholder: "ユーザー名を検索" %>
   </div>
-  <div class="actions"><%= f.submit "Search", class: "btn btn-primary" %></div>
+  <div class="actions"><%= f.submit "Search", class: "btn btn-primary search" %></div>
 <% end %>
 
 <ul class="users">

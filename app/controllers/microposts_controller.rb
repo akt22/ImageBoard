@@ -34,7 +34,7 @@ class MicropostsController < ApplicationController
     def tagging
       begin
         (vision @micropost.picture.file.path).each do |res|
-          @micropost.tag.build(tag: res[1].strip).save
+          @micropost.tags.build(tag: res[1].strip).save
         end
       rescue => e
         p "API Error."

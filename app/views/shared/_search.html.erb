@@ -1,0 +1,6 @@
+<li><%= search_form_for @search do |f| %>
+  <li class="field">
+    <%= f.text_field :tag_cont, placeholder: "検索" %>
+  </li>
+  <li class="actions"><%= f.submit "Search", class: "btn btn-primary" %></li>
+<% end %>

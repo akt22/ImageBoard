@@ -1,0 +1,21 @@
+<li id="micropost-<%= tagged_micropost(tag).id %>">
+  <%= link_to gravatar_for(tagged_micropost(tag).user, size: 50), tagged_micropost(tag).user %>
+  <span class="user"><%= link_to tagged_micropost(tag).user.name, tagged_micropost(tag).user %></span>
+  <span class="content">
+    <%= tagged_micropost(tag).content %>
+    <%= image_tag tagged_micropost(tag).picture.url if tagged_micropost(tag).picture? %>
+  </span>
+  <span class="starcount">
+    <% if tagged_micropost(tag).star_user(current_user) %>
+      <div id="star-button-<%= tagged_micropost(tag).id %>"><%= render 'stars/star', micropost: tagged_micropost(tag) %></div>
+    <% else %>
+      <div id="star-button-<%= tagged_micropost(tag).id %>"><%= render 'stars/unstar', micropost: tagged_micropost(tag) %></div>
+    <% end %>
+  </span>
+  <div class="timestamp">
+  <%= tagged_micropost(tag).created_at.to_s(:human) %>
+  <% if current_user?(tagged_micropost(tag).user) %>
+    <%= link_to "削除", tagged_micropost(tag), method: :delete,
+                                     data: { confirm: "本当に削除しますか?" } %></div>
+  <% end %>
+</li>

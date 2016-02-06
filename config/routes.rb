@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tags/index'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -20,4 +22,5 @@ Rails.application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :stars, only: [:create, :destroy]
+  resources :tags, only: [:index]
 end
