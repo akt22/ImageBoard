@@ -12,4 +12,4 @@ Getting Started
   $ bin/rake db:seed
   $ bin/rails s
 
-  ブラウザで `http://localhost:3000` にアクセスしてください。
+  ブラウザで http://localhost:3000 にアクセスしてください。
