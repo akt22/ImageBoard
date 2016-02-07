@@ -29,6 +29,13 @@ users = User.order(:created_at).take(6)
   users.each { |user| user.microposts.create!(content: content) }
 end
 
+user  = users.first
+image_path = File.join(Rails.root, "test/fixtures/images/sample.jpg")
+content = "Mt. Fuji!"
+micropost = user.microposts.create(content: content, picture: File.new(image_path))
+micropost.tags.create(tag: "mountain")
+
+
 users = User.all
 user  = users.first
 following = users[2..50]

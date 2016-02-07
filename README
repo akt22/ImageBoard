@@ -1,1 +1,17 @@
-# Image Board
+# 選択課題（3）サービス開発
+
+## Getting Started
++ Ruby version : `2.2.1`
+
+### 開発環境のセットアップ
+
++ このREADMEがあるディレクトリで以下のコマンドを実行して下さい。
+
+```
+$ bundle install
+$ bin/rake db:migrate
+$ bin/rake db:seed
+$ bin/rails s
+```
+
++ ブラウザで `http://localhost:3000` にアクセスしてください。
